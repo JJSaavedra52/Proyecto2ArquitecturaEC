@@ -1,0 +1,1416 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.81 build 7503 
+                                                                                               Mon Oct 09 18:55:41 2023
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 7503
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 7503"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           # 7 "C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTURA 
+                                 DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+    43                           	psect config,class=CONFIG,delta=2 ;#
+    44                           # 7 "C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTURA 
+                                 DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+    45  2007  FF71               	dw 0xFFFD & 0xFFFB & 0xFFF7 & 0xFF7F ;#
+    46                           	FNCALL	_main,_ConfigIntRB
+    47                           	FNCALL	_main,_ConfigTMR1
+    48                           	FNROOT	_main
+    49                           	FNCALL	intlevel1,_FunInt
+    50                           	global	intlevel1
+    51                           	FNROOT	intlevel1
+    52                           	global	_numeros
+    53                           	global	_bandResortico
+    54                           	global	_left
+    55                           	global	_op
+    56                           psect	idataBANK0,class=CODE,space=0,delta=2
+    57                           global __pidataBANK0
+    58  0160                     __pidataBANK0:
+    59                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+    60                           	line	25
+    61                           
+    62                           ;initializer for _numeros
+    63  0160  34FC               	retlw	0FCh
+    64  0161  3460               	retlw	060h
+    65  0162  34DA               	retlw	0DAh
+    66  0163  34F2               	retlw	0F2h
+    67  0164  3466               	retlw	066h
+    68  0165  34B6               	retlw	0B6h
+    69  0166  34BE               	retlw	0BEh
+    70  0167  34E0               	retlw	0E0h
+    71  0168  34FE               	retlw	0FEh
+    72  0169  34F6               	retlw	0F6h
+    73                           	line	23
+    74                           
+    75                           ;initializer for _bandResortico
+    76  016A  3401               	retlw	01h
+    77                           	line	22
+    78                           
+    79                           ;initializer for _left
+    80  016B  3401               	retlw	01h
+    81                           	line	24
+    82                           
+    83                           ;initializer for _op
+    84  016C  3401               	retlw	01h
+    85                           	global	_contador
+    86                           	global	_decenasMinutos
+    87                           	global	_decenasSegundos
+    88                           	global	_display1
+    89                           	global	_display2
+    90                           	global	_display3
+    91                           	global	_display4
+    92                           	global	_right
+    93                           	global	_unidadesMinutos
+    94                           	global	_unidadesSegundos
+    95                           	global	_ContTimer
+    96                           	global	_TMR1
+    97  000E                     _TMR1	set	14
+    98                           	global	_PORTA
+    99  0005                     _PORTA	set	5
+   100                           	global	_PORTC
+   101  0007                     _PORTC	set	7
+   102                           	global	_GIE
+   103  005F                     _GIE	set	95
+   104                           	global	_PEIE
+   105  005E                     _PEIE	set	94
+   106                           	global	_RB4
+   107  0034                     _RB4	set	52
+   108                           	global	_RB5
+   109  0035                     _RB5	set	53
+   110                           	global	_RB6
+   111  0036                     _RB6	set	54
+   112                           	global	_RBIE
+   113  005B                     _RBIE	set	91
+   114                           	global	_RBIF
+   115  0058                     _RBIF	set	88
+   116                           	global	_TMR1IF
+   117  0060                     _TMR1IF	set	96
+   118                           	global	_TMR1ON
+   119  0080                     _TMR1ON	set	128
+   120                           	global	_TRISB
+   121  0086                     _TRISB	set	134
+   122                           	global	_TMR1IE
+   123  0460                     _TMR1IE	set	1120
+   124                           	file	"Proyecto2.as"
+   125                           	line	#
+   126                           psect cinit,class=CODE,delta=2
+   127                           global start_initialization
+   128  0132                     start_initialization:
+   129                           
+   130                           psect	bssCOMMON,class=COMMON,space=1
+   131                           global __pbssCOMMON
+   132  0077                     __pbssCOMMON:
+   133  0077                     _ContTimer:
+   134  0077                            ds      1
+   135                           
+   136                           psect	bssBANK0,class=BANK0,space=1
+   137                           global __pbssBANK0
+   138  002D                     __pbssBANK0:
+   139  002D                     _contador:
+   140  002D                            ds      1
+   141                           
+   142  002E                     _decenasMinutos:
+   143  002E                            ds      1
+   144                           
+   145  002F                     _decenasSegundos:
+   146  002F                            ds      1
+   147                           
+   148  0030                     _display1:
+   149  0030                            ds      1
+   150                           
+   151  0031                     _display2:
+   152  0031                            ds      1
+   153                           
+   154  0032                     _display3:
+   155  0032                            ds      1
+   156                           
+   157  0033                     _display4:
+   158  0033                            ds      1
+   159                           
+   160  0034                     _right:
+   161  0034                            ds      1
+   162                           
+   163  0035                     _unidadesMinutos:
+   164  0035                            ds      1
+   165                           
+   166  0036                     _unidadesSegundos:
+   167  0036                            ds      1
+   168                           
+   169                           psect	dataBANK0,class=BANK0,space=1
+   170                           global __pdataBANK0
+   171  0020                     __pdataBANK0:
+   172                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   173                           	line	25
+   174  0020                     _numeros:
+   175  0020                            ds      10
+   176                           
+   177                           psect	dataBANK0
+   178                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   179                           	line	23
+   180  002A                     _bandResortico:
+   181  002A                            ds      1
+   182                           
+   183                           psect	dataBANK0
+   184                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   185                           	line	22
+   186  002B                     _left:
+   187  002B                            ds      1
+   188                           
+   189                           psect	dataBANK0
+   190                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   191                           	line	24
+   192  002C                     _op:
+   193  002C                            ds      1
+   194                           
+   195                           ; Clear objects allocated to COMMON
+   196                           psect cinit,class=CODE,delta=2
+   197  0132  01F7               	clrf	((__pbssCOMMON)+0)&07Fh
+   198                           ; Clear objects allocated to BANK0
+   199                           psect cinit,class=CODE,delta=2
+   200  0133  01AD               	clrf	((__pbssBANK0)+0)&07Fh
+   201  0134  01AE               	clrf	((__pbssBANK0)+1)&07Fh
+   202  0135  01AF               	clrf	((__pbssBANK0)+2)&07Fh
+   203  0136  01B0               	clrf	((__pbssBANK0)+3)&07Fh
+   204  0137  01B1               	clrf	((__pbssBANK0)+4)&07Fh
+   205  0138  01B2               	clrf	((__pbssBANK0)+5)&07Fh
+   206  0139  01B3               	clrf	((__pbssBANK0)+6)&07Fh
+   207  013A  01B4               	clrf	((__pbssBANK0)+7)&07Fh
+   208  013B  01B5               	clrf	((__pbssBANK0)+8)&07Fh
+   209  013C  01B6               	clrf	((__pbssBANK0)+9)&07Fh
+   210                           global btemp
+   211                           psect inittext,class=CODE,delta=2
+   212                           global init_fetch,btemp
+   213                           ;	Called with low address in FSR and high address in W
+   214  014F                     init_fetch:
+   215  014F  087E               	movf btemp,w
+   216  0150  008A               	movwf pclath
+   217  0151  087F               	movf btemp+1,w
+   218  0152  0082               	movwf pc
+   219                           global init_ram
+   220                           ;Called with:
+   221                           ;	high address of idata address in btemp 
+   222                           ;	low address of idata address in btemp+1 
+   223                           ;	low address of data in FSR
+   224                           ;	high address + 1 of data in btemp-1
+   225  0153                     init_ram:
+   226  0153  214F  120A  118A   	fcall init_fetch
+   227  0156  0080               	movwf indf,f
+   228  0157  0A84               	incf fsr,f
+   229  0158  0804               	movf fsr,w
+   230  0159  067D               	xorwf btemp-1,w
+   231  015A  1903               	btfsc status,2
+   232  015B  3400               	retlw 0
+   233  015C  0AFF               	incf btemp+1,f
+   234  015D  1903               	btfsc status,2
+   235  015E  0AFE               	incf btemp,f
+   236  015F  2953               	goto init_ram
+   237                           ; Initialize objects allocated to BANK0
+   238                           psect cinit,class=CODE,delta=2
+   239                           global init_ram, __pidataBANK0
+   240  013D  1383               	bcf	status, 7	;select IRP bank0
+   241  013E  302D               	movlw low(__pdataBANK0+13)
+   242  013F  00FD               	movwf btemp-1,f
+   243  0140  3001               	movlw high(__pidataBANK0)
+   244  0141  00FE               	movwf btemp,f
+   245  0142  3060               	movlw low(__pidataBANK0)
+   246  0143  00FF               	movwf btemp+1,f
+   247  0144  3020               	movlw low(__pdataBANK0)
+   248  0145  0084               	movwf fsr,f
+   249  0146  120A  118A  2153   	fcall init_ram
+              120A  118A         
+   250                           psect cinit,class=CODE,delta=2
+   251                           global end_of_initialization
+   252                           
+   253                           ;End of C runtime variable initialization code
+   254                           
+   255  014B                     end_of_initialization:
+   256  014B  0183               clrf status
+   257  014C  120A  118A  2815   ljmp _main	;jump to C main() function
+   258                           psect	cstackCOMMON,class=COMMON,space=1
+   259                           global __pcstackCOMMON
+   260  0070                     __pcstackCOMMON:
+   261                           	global	?_ConfigIntRB
+   262  0070                     ?_ConfigIntRB:	; 0 bytes @ 0x0
+   263                           	global	?_ConfigTMR1
+   264  0070                     ?_ConfigTMR1:	; 0 bytes @ 0x0
+   265                           	global	?_main
+   266  0070                     ?_main:	; 0 bytes @ 0x0
+   267                           	global	?_FunInt
+   268  0070                     ?_FunInt:	; 0 bytes @ 0x0
+   269                           	global	??_FunInt
+   270  0070                     ??_FunInt:	; 0 bytes @ 0x0
+   271  0070                     	ds	5
+   272                           	global	??_ConfigIntRB
+   273  0075                     ??_ConfigIntRB:	; 0 bytes @ 0x5
+   274                           	global	??_ConfigTMR1
+   275  0075                     ??_ConfigTMR1:	; 0 bytes @ 0x5
+   276  0075                     	ds	1
+   277                           	global	main@sentido
+   278  0076                     main@sentido:	; 1 bytes @ 0x6
+   279  0076                     	ds	1
+   280                           psect	cstackBANK0,class=BANK0,space=1
+   281                           global __pcstackBANK0
+   282  0037                     __pcstackBANK0:
+   283                           	global	??_main
+   284  0037                     ??_main:	; 0 bytes @ 0x0
+   285  0037                     	ds	3
+   286 ;;Data sizes: Strings 0, constant 0, data 13, bss 11, persistent 0 stack 0
+   287 ;;Auto spaces:   Size  Autos    Used
+   288 ;; COMMON          14      7       8
+   289 ;; BANK0           80      3      26
+   290 ;; BANK1           80      0       0
+   291 ;; BANK3           96      0       0
+   292 ;; BANK2           96      0       0
+   293                           
+   294 ;;
+   295 ;; Pointer list with targets:
+   296                           
+   297                           
+   298                           
+   299 ;;
+   300 ;; Critical Paths under _main in COMMON
+   301 ;;
+   302 ;;   _main->_ConfigIntRB
+   303 ;;
+   304 ;; Critical Paths under _FunInt in COMMON
+   305 ;;
+   306 ;;   None.
+   307 ;;
+   308 ;; Critical Paths under _main in BANK0
+   309 ;;
+   310 ;;   None.
+   311 ;;
+   312 ;; Critical Paths under _FunInt in BANK0
+   313 ;;
+   314 ;;   None.
+   315 ;;
+   316 ;; Critical Paths under _main in BANK1
+   317 ;;
+   318 ;;   None.
+   319 ;;
+   320 ;; Critical Paths under _FunInt in BANK1
+   321 ;;
+   322 ;;   None.
+   323 ;;
+   324 ;; Critical Paths under _main in BANK3
+   325 ;;
+   326 ;;   None.
+   327 ;;
+   328 ;; Critical Paths under _FunInt in BANK3
+   329 ;;
+   330 ;;   None.
+   331 ;;
+   332 ;; Critical Paths under _main in BANK2
+   333 ;;
+   334 ;;   None.
+   335 ;;
+   336 ;; Critical Paths under _FunInt in BANK2
+   337 ;;
+   338 ;;   None.
+   339                           
+   340 ;;
+   341 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   342 ;;
+   343                           
+   344 ;;
+   345 ;;Call Graph Tables:
+   346 ;;
+   347 ;; ---------------------------------------------------------------------------------
+   348 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   349 ;; ---------------------------------------------------------------------------------
+   350 ;; (0) _main                                                 4     4      0      68
+   351 ;;                                              6 COMMON     1     1      0
+   352 ;;                                              0 BANK0      3     3      0
+   353 ;;                        _ConfigIntRB
+   354 ;;                         _ConfigTMR1
+   355 ;; ---------------------------------------------------------------------------------
+   356 ;; (1) _ConfigTMR1                                           0     0      0       0
+   357 ;; ---------------------------------------------------------------------------------
+   358 ;; (1) _ConfigIntRB                                          1     1      0       0
+   359 ;;                                              5 COMMON     1     1      0
+   360 ;; ---------------------------------------------------------------------------------
+   361 ;; Estimated maximum stack depth 1
+   362 ;; ---------------------------------------------------------------------------------
+   363 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   364 ;; ---------------------------------------------------------------------------------
+   365 ;; (2) _FunInt                                               5     5      0       0
+   366 ;;                                              0 COMMON     5     5      0
+   367 ;; ---------------------------------------------------------------------------------
+   368 ;; Estimated maximum stack depth 2
+   369 ;; ---------------------------------------------------------------------------------
+   370                           
+   371 ;; Call Graph Graphs:
+   372                           
+   373 ;; _main (ROOT)
+   374 ;;   _ConfigIntRB
+   375 ;;   _ConfigTMR1
+   376 ;;
+   377 ;; _FunInt (ROOT)
+   378 ;;
+   379                           
+   380 ;; Address spaces:
+   381                           
+   382 ;;Name               Size   Autos  Total    Cost      Usage
+   383 ;;BANK3               60      0       0       9        0.0%
+   384 ;;BITBANK3            60      0       0       8        0.0%
+   385 ;;SFR3                 0      0       0       4        0.0%
+   386 ;;BITSFR3              0      0       0       4        0.0%
+   387 ;;BANK2               60      0       0      11        0.0%
+   388 ;;BITBANK2            60      0       0      10        0.0%
+   389 ;;SFR2                 0      0       0       5        0.0%
+   390 ;;BITSFR2              0      0       0       5        0.0%
+   391 ;;SFR1                 0      0       0       2        0.0%
+   392 ;;BITSFR1              0      0       0       2        0.0%
+   393 ;;BANK1               50      0       0       7        0.0%
+   394 ;;BITBANK1            50      0       0       6        0.0%
+   395 ;;CODE                 0      0       0       0        0.0%
+   396 ;;DATA                 0      0      23      12        0.0%
+   397 ;;ABS                  0      0      22       3        0.0%
+   398 ;;NULL                 0      0       0       0        0.0%
+   399 ;;STACK                0      0       1       2        0.0%
+   400 ;;BANK0               50      3      1A       5       32.5%
+   401 ;;BITBANK0            50      0       0       4        0.0%
+   402 ;;SFR0                 0      0       0       1        0.0%
+   403 ;;BITSFR0              0      0       0       1        0.0%
+   404 ;;COMMON               E      7       8       1       57.1%
+   405 ;;BITCOMMON            E      0       0       0        0.0%
+   406 ;;EEDATA             100      0       0       0        0.0%
+   407                           
+   408                           	global	_main
+   409                           psect	maintext,global,class=CODE,delta=2
+   410                           global __pmaintext
+   411  0015                     __pmaintext:
+   412                           
+   413 ;; *************** function _main *****************
+   414 ;; Defined at:
+   415 ;;		line 43 in file "C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTURA DE COMPUTADORES\
+       CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   416 ;; Parameters:    Size  Location     Type
+   417 ;;		None
+   418 ;; Auto vars:     Size  Location     Type
+   419 ;;  sentido         1    6[COMMON] unsigned char 
+   420 ;; Return value:  Size  Location     Type
+   421 ;;		None               void
+   422 ;; Registers used:
+   423 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   424 ;; Tracked objects:
+   425 ;;		On entry : 17F/0
+   426 ;;		On exit  : 0/0
+   427 ;;		Unchanged: 0/0
+   428 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   429 ;;      Params:         0       0       0       0       0
+   430 ;;      Locals:         1       0       0       0       0
+   431 ;;      Temps:          0       3       0       0       0
+   432 ;;      Totals:         1       3       0       0       0
+   433 ;;Total ram usage:        4 bytes
+   434 ;; Hardware stack levels required when called:    2
+   435 ;; This function calls:
+   436 ;;		_ConfigIntRB
+   437 ;;		_ConfigTMR1
+   438 ;; This function is called by:
+   439 ;;		Startup code after reset
+   440 ;; This function uses a non-reentrant model
+   441 ;;
+   442                           psect	maintext
+   443                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   444                           	line	43
+   445                           	global	__size_of_main
+   446  00C4                     	__size_of_main	equ	__end_of_main-_main
+   447                           	
+   448  0015                     _main:	
+   449                           	opt	stack 6
+   450                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   451                           	line	45
+   452                           	
+   453  0015                     l2174:	
+   454                           ;proyectoDos.c: 45: PORTC = 0x80;
+   455  0015  3080               	movlw	(080h)
+   456  0016  1283               	bcf	status, 5	;RP0=0, select bank0
+   457  0017  1303               	bcf	status, 6	;RP1=0, select bank0
+   458  0018  0087               	movwf	(7)	;volatile
+   459                           	line	46
+   460                           	
+   461  0019                     l2176:	
+   462                           ;proyectoDos.c: 46: right = 0;
+   463  0019  01B4               	clrf	(_right)
+   464                           	line	47
+   465                           	
+   466  001A                     l2178:	
+   467                           ;proyectoDos.c: 47: left = 1;
+   468  001A  01AB               	clrf	(_left)
+   469  001B  1403               	bsf	status,0
+   470  001C  0DAB               	rlf	(_left),f
+   471                           	line	48
+   472                           	
+   473  001D                     l2180:	
+   474                           ;proyectoDos.c: 48: unsigned char sentido = left;
+   475  001D  082B               	movf	(_left),w
+   476  001E  00B7               	movwf	(??_main+0)+0
+   477  001F  0837               	movf	(??_main+0)+0,w
+   478  0020  00F6               	movwf	(main@sentido)
+   479                           	line	49
+   480                           ;proyectoDos.c: 49: bandResortico = 1;
+   481  0021  01AA               	clrf	(_bandResortico)
+   482  0022  1403               	bsf	status,0
+   483  0023  0DAA               	rlf	(_bandResortico),f
+   484                           	line	50
+   485                           ;proyectoDos.c: 50: op = 1;
+   486  0024  01AC               	clrf	(_op)
+   487  0025  1403               	bsf	status,0
+   488  0026  0DAC               	rlf	(_op),f
+   489                           	line	51
+   490                           	
+   491  0027                     l2182:	
+   492                           ;proyectoDos.c: 51: ConfigIntRB();
+   493  0027  120A  118A  2179   	fcall	_ConfigIntRB
+              120A  118A         
+   494                           	line	52
+   495                           	
+   496  002C                     l2184:	
+   497                           ;proyectoDos.c: 52: ConfigTMR1();
+   498  002C  120A  118A  216D   	fcall	_ConfigTMR1
+              120A  118A         
+   499  0031  2832               	goto	l2186
+   500                           	line	54
+   501                           ;proyectoDos.c: 54: while (1) {
+   502                           	
+   503  0032                     l721:	
+   504                           	line	55
+   505                           	
+   506  0032                     l2186:	
+   507                           ;proyectoDos.c: 55: _delay((unsigned long)((1000)*(4000000/4000.0)));
+   508                           	opt asmopt_off
+   509  0032  3006               movlw  6
+   510  0033  1283               	bcf	status, 5	;RP0=0, select bank0
+   511  0034  1303               	bcf	status, 6	;RP1=0, select bank0
+   512  0035  00B9               movwf	((??_main+0)+0+2),f
+   513  0036  300E               movlw	14
+   514  0037  00B8               movwf	((??_main+0)+0+1),f
+   515  0038  30B0               	movlw	176
+   516  0039  00B7               movwf	((??_main+0)+0),f
+   517  003A                     u2667:
+   518  003A  0BB7               	decfsz	((??_main+0)+0),f
+   519  003B  283A               	goto	u2667
+   520  003C  0BB8               	decfsz	((??_main+0)+0+1),f
+   521  003D  283A               	goto	u2667
+   522  003E  0BB9               	decfsz	((??_main+0)+0+2),f
+   523  003F  283A               	goto	u2667
+   524                           opt asmopt_on
+   525                           
+   526                           	line	57
+   527                           	
+   528  0040                     l2188:	
+   529                           ;proyectoDos.c: 57: if (bandResortico == 1) {
+   530  0040  1283               	bcf	status, 5	;RP0=0, select bank0
+   531  0041  1303               	bcf	status, 6	;RP1=0, select bank0
+   532  0042  082A               	movf	(_bandResortico),w
+   533  0043  3A01               	xorlw	01h
+   534  0044  1D03               	skipz
+   535  0045  2847               	goto	u2541
+   536  0046  2848               	goto	u2540
+   537  0047                     u2541:
+   538  0047  284D               	goto	l2192
+   539  0048                     u2540:
+   540                           	line	58
+   541                           	
+   542  0048                     l2190:	
+   543                           ;proyectoDos.c: 58: contador += 1;
+   544  0048  3001               	movlw	(01h)
+   545  0049  00B7               	movwf	(??_main+0)+0
+   546  004A  0837               	movf	(??_main+0)+0,w
+   547  004B  07AD               	addwf	(_contador),f
+   548  004C  284D               	goto	l2192
+   549                           	line	59
+   550                           	
+   551  004D                     l722:	
+   552                           	line	60
+   553                           	
+   554  004D                     l2192:	
+   555                           ;proyectoDos.c: 59: }
+   556                           ;proyectoDos.c: 60: if (contador == 130) {
+   557  004D  082D               	movf	(_contador),w
+   558  004E  3A82               	xorlw	082h
+   559  004F  1D03               	skipz
+   560  0050  2852               	goto	u2551
+   561  0051  2853               	goto	u2550
+   562  0052                     u2551:
+   563  0052  286E               	goto	l723
+   564  0053                     u2550:
+   565                           	line	61
+   566                           	
+   567  0053                     l2194:	
+   568                           ;proyectoDos.c: 61: if (PORTC == 0x01 || PORTC == 0x80) {
+   569  0053  0807               	movf	(7),w	;volatile
+   570  0054  3A01               	xorlw	01h
+   571  0055  1903               	skipnz
+   572  0056  2858               	goto	u2561
+   573  0057  2859               	goto	u2560
+   574  0058                     u2561:
+   575  0058  285F               	goto	l726
+   576  0059                     u2560:
+   577                           	
+   578  0059                     l2196:	
+   579  0059  0807               	movf	(7),w	;volatile
+   580  005A  3A80               	xorlw	080h
+   581  005B  1D03               	skipz
+   582  005C  285E               	goto	u2571
+   583  005D  285F               	goto	u2570
+   584  005E                     u2571:
+   585  005E  2861               	goto	l2198
+   586  005F                     u2570:
+   587                           	
+   588  005F                     l726:	
+   589                           	line	62
+   590                           ;proyectoDos.c: 62: sentido = ~sentido;
+   591  005F  09F6               	comf	(main@sentido),f
+   592  0060  2861               	goto	l2198
+   593                           	line	63
+   594                           	
+   595  0061                     l724:	
+   596                           	line	64
+   597                           	
+   598  0061                     l2198:	
+   599                           ;proyectoDos.c: 63: }
+   600                           ;proyectoDos.c: 64: if (sentido == right) {
+   601  0061  0876               	movf	(main@sentido),w
+   602  0062  0634               	xorwf	(_right),w
+   603  0063  1D03               	skipz
+   604  0064  2866               	goto	u2581
+   605  0065  2867               	goto	u2580
+   606  0066                     u2581:
+   607  0066  286A               	goto	l2202
+   608  0067                     u2580:
+   609                           	line	65
+   610                           	
+   611  0067                     l2200:	
+   612                           ;proyectoDos.c: 65: PORTC >>= 1;
+   613  0067  1003               	clrc
+   614  0068  0C87               	rrf	(7),f	;volatile
+   615                           
+   616                           	line	66
+   617                           ;proyectoDos.c: 66: } else {
+   618  0069  286D               	goto	l2204
+   619                           	
+   620  006A                     l727:	
+   621                           	line	67
+   622                           	
+   623  006A                     l2202:	
+   624                           ;proyectoDos.c: 67: PORTC <<= 1;
+   625  006A  1003               	clrc
+   626  006B  0D87               	rlf	(7),f	;volatile
+   627                           
+   628  006C  286D               	goto	l2204
+   629                           	line	68
+   630                           	
+   631  006D                     l728:	
+   632                           	line	69
+   633                           	
+   634  006D                     l2204:	
+   635                           ;proyectoDos.c: 68: }
+   636                           ;proyectoDos.c: 69: contador = 0;
+   637  006D  01AD               	clrf	(_contador)
+   638                           	line	70
+   639                           	
+   640  006E                     l723:	
+   641                           	line	73
+   642                           ;proyectoDos.c: 70: }
+   643                           ;proyectoDos.c: 73: if (unidadesSegundos == 10) {
+   644  006E  0836               	movf	(_unidadesSegundos),w
+   645  006F  3A0A               	xorlw	0Ah
+   646  0070  1D03               	skipz
+   647  0071  2873               	goto	u2591
+   648  0072  2874               	goto	u2590
+   649  0073                     u2591:
+   650  0073  287A               	goto	l2210
+   651  0074                     u2590:
+   652                           	line	74
+   653                           	
+   654  0074                     l2206:	
+   655                           ;proyectoDos.c: 74: unidadesSegundos = 0;
+   656  0074  01B6               	clrf	(_unidadesSegundos)
+   657                           	line	75
+   658                           	
+   659  0075                     l2208:	
+   660                           ;proyectoDos.c: 75: decenasSegundos += 1;
+   661  0075  3001               	movlw	(01h)
+   662  0076  00B7               	movwf	(??_main+0)+0
+   663  0077  0837               	movf	(??_main+0)+0,w
+   664  0078  07AF               	addwf	(_decenasSegundos),f
+   665  0079  287A               	goto	l2210
+   666                           	line	76
+   667                           	
+   668  007A                     l729:	
+   669                           	line	77
+   670                           	
+   671  007A                     l2210:	
+   672                           ;proyectoDos.c: 76: }
+   673                           ;proyectoDos.c: 77: display1 = 1;
+   674  007A  01B0               	clrf	(_display1)
+   675  007B  1403               	bsf	status,0
+   676  007C  0DB0               	rlf	(_display1),f
+   677                           	line	78
+   678                           	
+   679  007D                     l2212:	
+   680                           ;proyectoDos.c: 78: PORTA = numeros[unidadesSegundos];
+   681  007D  0836               	movf	(_unidadesSegundos),w
+   682  007E  3E20               	addlw	_numeros&0ffh
+   683  007F  0084               	movwf	fsr0
+   684  0080  1383               	bcf	status, 7	;select IRP bank0
+   685  0081  0800               	movf	indf,w
+   686  0082  0085               	movwf	(5)	;volatile
+   687                           	line	79
+   688                           	
+   689  0083                     l2214:	
+   690                           ;proyectoDos.c: 79: display1 = 0;
+   691  0083  01B0               	clrf	(_display1)
+   692                           	line	80
+   693                           	
+   694  0084                     l2216:	
+   695                           ;proyectoDos.c: 80: if (decenasSegundos == 6) {
+   696  0084  082F               	movf	(_decenasSegundos),w
+   697  0085  3A06               	xorlw	06h
+   698  0086  1D03               	skipz
+   699  0087  2889               	goto	u2601
+   700  0088  288A               	goto	u2600
+   701  0089                     u2601:
+   702  0089  2890               	goto	l2222
+   703  008A                     u2600:
+   704                           	line	81
+   705                           	
+   706  008A                     l2218:	
+   707                           ;proyectoDos.c: 81: decenasSegundos = 0;
+   708  008A  01AF               	clrf	(_decenasSegundos)
+   709                           	line	82
+   710                           	
+   711  008B                     l2220:	
+   712                           ;proyectoDos.c: 82: unidadesMinutos += 1;
+   713  008B  3001               	movlw	(01h)
+   714  008C  00B7               	movwf	(??_main+0)+0
+   715  008D  0837               	movf	(??_main+0)+0,w
+   716  008E  07B5               	addwf	(_unidadesMinutos),f
+   717  008F  2890               	goto	l2222
+   718                           	line	83
+   719                           	
+   720  0090                     l730:	
+   721                           	line	84
+   722                           	
+   723  0090                     l2222:	
+   724                           ;proyectoDos.c: 83: }
+   725                           ;proyectoDos.c: 84: display2 = 1;
+   726  0090  01B1               	clrf	(_display2)
+   727  0091  1403               	bsf	status,0
+   728  0092  0DB1               	rlf	(_display2),f
+   729                           	line	85
+   730                           	
+   731  0093                     l2224:	
+   732                           ;proyectoDos.c: 85: PORTA = numeros[decenasSegundos];
+   733  0093  082F               	movf	(_decenasSegundos),w
+   734  0094  3E20               	addlw	_numeros&0ffh
+   735  0095  0084               	movwf	fsr0
+   736  0096  0800               	movf	indf,w
+   737  0097  0085               	movwf	(5)	;volatile
+   738                           	line	86
+   739                           	
+   740  0098                     l2226:	
+   741                           ;proyectoDos.c: 86: display2 = 0;
+   742  0098  01B1               	clrf	(_display2)
+   743                           	line	87
+   744                           	
+   745  0099                     l2228:	
+   746                           ;proyectoDos.c: 87: if (unidadesMinutos == 10) {
+   747  0099  0835               	movf	(_unidadesMinutos),w
+   748  009A  3A0A               	xorlw	0Ah
+   749  009B  1D03               	skipz
+   750  009C  289E               	goto	u2611
+   751  009D  289F               	goto	u2610
+   752  009E                     u2611:
+   753  009E  28A5               	goto	l2234
+   754  009F                     u2610:
+   755                           	line	88
+   756                           	
+   757  009F                     l2230:	
+   758                           ;proyectoDos.c: 88: unidadesMinutos = 0;
+   759  009F  01B5               	clrf	(_unidadesMinutos)
+   760                           	line	89
+   761                           	
+   762  00A0                     l2232:	
+   763                           ;proyectoDos.c: 89: decenasMinutos += 1;
+   764  00A0  3001               	movlw	(01h)
+   765  00A1  00B7               	movwf	(??_main+0)+0
+   766  00A2  0837               	movf	(??_main+0)+0,w
+   767  00A3  07AE               	addwf	(_decenasMinutos),f
+   768  00A4  28A5               	goto	l2234
+   769                           	line	90
+   770                           	
+   771  00A5                     l731:	
+   772                           	line	91
+   773                           	
+   774  00A5                     l2234:	
+   775                           ;proyectoDos.c: 90: }
+   776                           ;proyectoDos.c: 91: display3 = 1;
+   777  00A5  01B2               	clrf	(_display3)
+   778  00A6  1403               	bsf	status,0
+   779  00A7  0DB2               	rlf	(_display3),f
+   780                           	line	92
+   781                           	
+   782  00A8                     l2236:	
+   783                           ;proyectoDos.c: 92: PORTA = numeros[unidadesMinutos];
+   784  00A8  0835               	movf	(_unidadesMinutos),w
+   785  00A9  3E20               	addlw	_numeros&0ffh
+   786  00AA  0084               	movwf	fsr0
+   787  00AB  0800               	movf	indf,w
+   788  00AC  0085               	movwf	(5)	;volatile
+   789                           	line	93
+   790                           	
+   791  00AD                     l2238:	
+   792                           ;proyectoDos.c: 93: display3 = 0;
+   793  00AD  01B2               	clrf	(_display3)
+   794                           	line	94
+   795                           	
+   796  00AE                     l2240:	
+   797                           ;proyectoDos.c: 94: if (decenasMinutos == 9 && unidadesMinutos == 9 && decenasSegundos =
+                                 = 5 && decenasMinutos == 9) {
+   798  00AE  082E               	movf	(_decenasMinutos),w
+   799  00AF  3A09               	xorlw	09h
+   800  00B0  1D03               	skipz
+   801  00B1  28B3               	goto	u2621
+   802  00B2  28B4               	goto	u2620
+   803  00B3                     u2621:
+   804  00B3  28CB               	goto	l2250
+   805  00B4                     u2620:
+   806                           	
+   807  00B4                     l2242:	
+   808  00B4  0835               	movf	(_unidadesMinutos),w
+   809  00B5  3A09               	xorlw	09h
+   810  00B6  1D03               	skipz
+   811  00B7  28B9               	goto	u2631
+   812  00B8  28BA               	goto	u2630
+   813  00B9                     u2631:
+   814  00B9  28CB               	goto	l2250
+   815  00BA                     u2630:
+   816                           	
+   817  00BA                     l2244:	
+   818  00BA  082F               	movf	(_decenasSegundos),w
+   819  00BB  3A05               	xorlw	05h
+   820  00BC  1D03               	skipz
+   821  00BD  28BF               	goto	u2641
+   822  00BE  28C0               	goto	u2640
+   823  00BF                     u2641:
+   824  00BF  28CB               	goto	l2250
+   825  00C0                     u2640:
+   826                           	
+   827  00C0                     l2246:	
+   828  00C0  082E               	movf	(_decenasMinutos),w
+   829  00C1  3A09               	xorlw	09h
+   830  00C2  1D03               	skipz
+   831  00C3  28C5               	goto	u2651
+   832  00C4  28C6               	goto	u2650
+   833  00C5                     u2651:
+   834  00C5  28CB               	goto	l2250
+   835  00C6                     u2650:
+   836                           	line	95
+   837                           	
+   838  00C6                     l2248:	
+   839                           ;proyectoDos.c: 95: unidadesSegundos = 0;
+   840  00C6  01B6               	clrf	(_unidadesSegundos)
+   841                           	line	96
+   842                           ;proyectoDos.c: 96: decenasSegundos = 0;
+   843  00C7  01AF               	clrf	(_decenasSegundos)
+   844                           	line	97
+   845                           ;proyectoDos.c: 97: unidadesMinutos = 0;
+   846  00C8  01B5               	clrf	(_unidadesMinutos)
+   847                           	line	98
+   848                           ;proyectoDos.c: 98: decenasMinutos = 0;
+   849  00C9  01AE               	clrf	(_decenasMinutos)
+   850  00CA  28CB               	goto	l2250
+   851                           	line	99
+   852                           	
+   853  00CB                     l732:	
+   854                           	line	100
+   855                           	
+   856  00CB                     l2250:	
+   857                           ;proyectoDos.c: 99: }
+   858                           ;proyectoDos.c: 100: display4 = 1;
+   859  00CB  01B3               	clrf	(_display4)
+   860  00CC  1403               	bsf	status,0
+   861  00CD  0DB3               	rlf	(_display4),f
+   862                           	line	101
+   863                           	
+   864  00CE                     l2252:	
+   865                           ;proyectoDos.c: 101: PORTA = numeros[decenasMinutos];
+   866  00CE  082E               	movf	(_decenasMinutos),w
+   867  00CF  3E20               	addlw	_numeros&0ffh
+   868  00D0  0084               	movwf	fsr0
+   869  00D1  0800               	movf	indf,w
+   870  00D2  0085               	movwf	(5)	;volatile
+   871                           	line	102
+   872                           	
+   873  00D3                     l2254:	
+   874                           ;proyectoDos.c: 102: display4 = 0;
+   875  00D3  01B3               	clrf	(_display4)
+   876  00D4  2832               	goto	l2186
+   877                           	line	103
+   878                           	
+   879  00D5                     l733:	
+   880                           	line	54
+   881  00D5  2832               	goto	l2186
+   882                           	
+   883  00D6                     l734:	
+   884                           	line	104
+   885                           	
+   886  00D6                     l735:	
+   887                           	global	start
+   888  00D6  120A  118A  2812   	ljmp	start
+   889                           	opt stack 0
+   890                           GLOBAL	__end_of_main
+   891  00D9                     	__end_of_main:
+   892 ;; =============== function _main ends ============
+   893                           
+   894                           	signat	_main,88
+   895                           	global	_ConfigTMR1
+   896                           psect	text162,local,class=CODE,delta=2
+   897                           global __ptext162
+   898  016D                     __ptext162:
+   899                           
+   900 ;; *************** function _ConfigTMR1 *****************
+   901 ;; Defined at:
+   902 ;;		line 151 in file "C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTURA DE COMPUTADORES
+       \CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   903 ;; Parameters:    Size  Location     Type
+   904 ;;		None
+   905 ;; Auto vars:     Size  Location     Type
+   906 ;;		None
+   907 ;; Return value:  Size  Location     Type
+   908 ;;		None               void
+   909 ;; Registers used:
+   910 ;;		wreg
+   911 ;; Tracked objects:
+   912 ;;		On entry : 0/0
+   913 ;;		On exit  : 0/0
+   914 ;;		Unchanged: 0/0
+   915 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   916 ;;      Params:         0       0       0       0       0
+   917 ;;      Locals:         0       0       0       0       0
+   918 ;;      Temps:          0       0       0       0       0
+   919 ;;      Totals:         0       0       0       0       0
+   920 ;;Total ram usage:        0 bytes
+   921 ;; Hardware stack levels used:    1
+   922 ;; Hardware stack levels required when called:    1
+   923 ;; This function calls:
+   924 ;;		Nothing
+   925 ;; This function is called by:
+   926 ;;		_main
+   927 ;; This function uses a non-reentrant model
+   928 ;;
+   929                           psect	text162
+   930                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   931                           	line	151
+   932                           	global	__size_of_ConfigTMR1
+   933  000C                     	__size_of_ConfigTMR1	equ	__end_of_ConfigTMR1-_ConfigTMR1
+   934                           	
+   935  016D                     _ConfigTMR1:	
+   936                           	opt	stack 6
+   937                           ; Regs used in _ConfigTMR1: [wreg]
+   938                           	line	156
+   939                           	
+   940  016D                     l2166:	
+   941                           ;proyectoDos.c: 156: TMR1 = -62500;
+   942  016D  30DC               	movlw	low(0BDCh)
+   943  016E  1283               	bcf	status, 5	;RP0=0, select bank0
+   944  016F  1303               	bcf	status, 6	;RP1=0, select bank0
+   945  0170  008E               	movwf	(14)	;volatile
+   946  0171  300B               	movlw	high(0BDCh)
+   947  0172  008F               	movwf	((14))+1	;volatile
+   948                           	line	159
+   949                           	
+   950  0173                     l2168:	
+   951                           ;proyectoDos.c: 159: GIE = 1;
+   952  0173  178B               	bsf	(95/8),(95)&7
+   953                           	line	160
+   954                           	
+   955  0174                     l2170:	
+   956                           ;proyectoDos.c: 160: PEIE = 1;
+   957  0174  170B               	bsf	(94/8),(94)&7
+   958                           	line	161
+   959                           	
+   960  0175                     l2172:	
+   961                           ;proyectoDos.c: 161: TMR1IE = 1;
+   962  0175  1683               	bsf	status, 5	;RP0=1, select bank1
+   963  0176  1303               	bcf	status, 6	;RP1=0, select bank1
+   964  0177  140C               	bsf	(1120/8)^080h,(1120)&7
+   965                           	line	162
+   966                           	
+   967  0178                     l749:	
+   968  0178  0008               	return
+   969                           	opt stack 0
+   970                           GLOBAL	__end_of_ConfigTMR1
+   971  0179                     	__end_of_ConfigTMR1:
+   972 ;; =============== function _ConfigTMR1 ends ============
+   973                           
+   974                           	signat	_ConfigTMR1,88
+   975                           	global	_ConfigIntRB
+   976                           psect	text163,local,class=CODE,delta=2
+   977                           global __ptext163
+   978  0179                     __ptext163:
+   979                           
+   980 ;; *************** function _ConfigIntRB *****************
+   981 ;; Defined at:
+   982 ;;		line 140 in file "C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTURA DE COMPUTADORES
+       \CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+   983 ;; Parameters:    Size  Location     Type
+   984 ;;		None
+   985 ;; Auto vars:     Size  Location     Type
+   986 ;;		None
+   987 ;; Return value:  Size  Location     Type
+   988 ;;		None               void
+   989 ;; Registers used:
+   990 ;;		wreg, status,2, status,0
+   991 ;; Tracked objects:
+   992 ;;		On entry : 0/0
+   993 ;;		On exit  : 0/0
+   994 ;;		Unchanged: 0/0
+   995 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   996 ;;      Params:         0       0       0       0       0
+   997 ;;      Locals:         0       0       0       0       0
+   998 ;;      Temps:          1       0       0       0       0
+   999 ;;      Totals:         1       0       0       0       0
+  1000 ;;Total ram usage:        1 bytes
+  1001 ;; Hardware stack levels used:    1
+  1002 ;; Hardware stack levels required when called:    1
+  1003 ;; This function calls:
+  1004 ;;		Nothing
+  1005 ;; This function is called by:
+  1006 ;;		_main
+  1007 ;; This function uses a non-reentrant model
+  1008 ;;
+  1009                           psect	text163
+  1010                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+  1011                           	line	140
+  1012                           	global	__size_of_ConfigIntRB
+  1013  0009                     	__size_of_ConfigIntRB	equ	__end_of_ConfigIntRB-_ConfigIntRB
+  1014                           	
+  1015  0179                     _ConfigIntRB:	
+  1016                           	opt	stack 6
+  1017                           ; Regs used in _ConfigIntRB: [wreg+status,2+status,0]
+  1018                           	line	144
+  1019                           	
+  1020  0179                     l2160:	
+  1021                           ;proyectoDos.c: 144: TRISB |= 0B11110000;
+  1022  0179  30F0               	movlw	(0F0h)
+  1023  017A  00F5               	movwf	(??_ConfigIntRB+0)+0
+  1024  017B  0875               	movf	(??_ConfigIntRB+0)+0,w
+  1025  017C  1683               	bsf	status, 5	;RP0=1, select bank1
+  1026  017D  1303               	bcf	status, 6	;RP1=0, select bank1
+  1027  017E  0486               	iorwf	(134)^080h,f	;volatile
+  1028                           	line	147
+  1029                           	
+  1030  017F                     l2162:	
+  1031                           ;proyectoDos.c: 147: GIE = 1;
+  1032  017F  178B               	bsf	(95/8),(95)&7
+  1033                           	line	148
+  1034                           	
+  1035  0180                     l2164:	
+  1036                           ;proyectoDos.c: 148: RBIE = 1;
+  1037  0180  158B               	bsf	(91/8),(91)&7
+  1038                           	line	149
+  1039                           	
+  1040  0181                     l746:	
+  1041  0181  0008               	return
+  1042                           	opt stack 0
+  1043                           GLOBAL	__end_of_ConfigIntRB
+  1044  0182                     	__end_of_ConfigIntRB:
+  1045 ;; =============== function _ConfigIntRB ends ============
+  1046                           
+  1047                           	signat	_ConfigIntRB,88
+  1048                           	global	_FunInt
+  1049                           psect	text164,local,class=CODE,delta=2
+  1050                           global __ptext164
+  1051  00D9                     __ptext164:
+  1052                           
+  1053 ;; *************** function _FunInt *****************
+  1054 ;; Defined at:
+  1055 ;;		line 106 in file "C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTURA DE COMPUTADORES
+       \CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+  1056 ;; Parameters:    Size  Location     Type
+  1057 ;;		None
+  1058 ;; Auto vars:     Size  Location     Type
+  1059 ;;		None
+  1060 ;; Return value:  Size  Location     Type
+  1061 ;;		None               void
+  1062 ;; Registers used:
+  1063 ;;		wreg, status,2, status,0
+  1064 ;; Tracked objects:
+  1065 ;;		On entry : 0/0
+  1066 ;;		On exit  : 0/0
+  1067 ;;		Unchanged: 0/0
+  1068 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1069 ;;      Params:         0       0       0       0       0
+  1070 ;;      Locals:         0       0       0       0       0
+  1071 ;;      Temps:          5       0       0       0       0
+  1072 ;;      Totals:         5       0       0       0       0
+  1073 ;;Total ram usage:        5 bytes
+  1074 ;; Hardware stack levels used:    1
+  1075 ;; This function calls:
+  1076 ;;		Nothing
+  1077 ;; This function is called by:
+  1078 ;;		Interrupt level 1
+  1079 ;; This function uses a non-reentrant model
+  1080 ;;
+  1081                           psect	text164
+  1082                           	file	"C:\Users\ether\OneDrive\Escritorio\Semestres Universidad\6TO SEMESTRE\ARQUITECTUR
+                                 A DE COMPUTADORES\CORTE 2\Proyecto2\..\PARCIAL2\proyectoDos.c"
+  1083                           	line	106
+  1084                           	global	__size_of_FunInt
+  1085  0059                     	__size_of_FunInt	equ	__end_of_FunInt-_FunInt
+  1086                           	
+  1087  00D9                     _FunInt:	
+  1088                           	opt	stack 6
+  1089                           ; Regs used in _FunInt: [wreg+status,2+status,0]
+  1090                           psect	intentry,class=CODE,delta=2
+  1091                           global __pintentry
+  1092  0004                     __pintentry:
+  1093                           global interrupt_function
+  1094  0004                     interrupt_function:
+  1095                           	global saved_w
+  1096  007E                     	saved_w	set	btemp+0
+  1097  0004  00FE               	movwf	saved_w
+  1098  0005  0E03               	swapf	status,w
+  1099  0006  00F1               	movwf	(??_FunInt+1)
+  1100  0007  0804               	movf	fsr0,w
+  1101  0008  00F2               	movwf	(??_FunInt+2)
+  1102  0009  080A               	movf	pclath,w
+  1103  000A  00F3               	movwf	(??_FunInt+3)
+  1104  000B  1283               	bcf	status, 5	;RP0=0, select bank0
+  1105  000C  1303               	bcf	status, 6	;RP1=0, select bank0
+  1106  000D  087F               	movf	btemp+1,w
+  1107  000E  00F4               	movwf	(??_FunInt+4)
+  1108  000F  120A  118A  28D9   	ljmp	_FunInt
+  1109                           psect	text164
+  1110                           	line	107
+  1111                           	
+  1112  00D9                     i1l2036:	
+  1113                           ;proyectoDos.c: 107: if (RBIF == 1 && RB4 == op) {
+  1114  00D9  1C0B               	btfss	(88/8),(88)&7
+  1115  00DA  28DC               	goto	u234_21
+  1116  00DB  28DD               	goto	u234_20
+  1117  00DC                     u234_21:
+  1118  00DC  28E7               	goto	i1l738
+  1119  00DD                     u234_20:
+  1120                           	
+  1121  00DD                     i1l2038:	
+  1122  00DD  3000               	movlw	0
+  1123  00DE  1A06               	btfsc	(52/8),(52)&7
+  1124  00DF  3001               	movlw	1
+  1125  00E0  062C               	xorwf	(_op),w
+  1126  00E1  1D03               	skipz
+  1127  00E2  28E4               	goto	u235_21
+  1128  00E3  28E5               	goto	u235_20
+  1129  00E4                     u235_21:
+  1130  00E4  28E7               	goto	i1l738
+  1131  00E5                     u235_20:
+  1132                           	line	109
+  1133                           	
+  1134  00E5                     i1l2040:	
+  1135                           ;proyectoDos.c: 109: bandResortico = ~bandResortico;
+  1136  00E5  09AA               	comf	(_bandResortico),f
+  1137                           	line	110
+  1138                           ;proyectoDos.c: 110: RBIF = 0;
+  1139  00E6  100B               	bcf	(88/8),(88)&7
+  1140                           	line	111
+  1141                           	
+  1142  00E7                     i1l738:	
+  1143                           	line	112
+  1144                           ;proyectoDos.c: 111: }
+  1145                           ;proyectoDos.c: 112: if (RBIF == 1 && RB5 == op) {
+  1146  00E7  1C0B               	btfss	(88/8),(88)&7
+  1147  00E8  28EA               	goto	u236_21
+  1148  00E9  28EB               	goto	u236_20
+  1149  00EA                     u236_21:
+  1150  00EA  28F7               	goto	i1l2048
+  1151  00EB                     u236_20:
+  1152                           	
+  1153  00EB                     i1l2042:	
+  1154  00EB  3000               	movlw	0
+  1155  00EC  1A86               	btfsc	(53/8),(53)&7
+  1156  00ED  3001               	movlw	1
+  1157  00EE  062C               	xorwf	(_op),w
+  1158  00EF  1D03               	skipz
+  1159  00F0  28F2               	goto	u237_21
+  1160  00F1  28F3               	goto	u237_20
+  1161  00F2                     u237_21:
+  1162  00F2  28F7               	goto	i1l2048
+  1163  00F3                     u237_20:
+  1164                           	line	114
+  1165                           	
+  1166  00F3                     i1l2044:	
+  1167                           ;proyectoDos.c: 114: TMR1ON = ~TMR1ON;
+  1168  00F3  3001               	movlw	1<<((128)&7)
+  1169  00F4  0690               	xorwf	((128)/8),f
+  1170                           	line	115
+  1171                           	
+  1172  00F5                     i1l2046:	
+  1173                           ;proyectoDos.c: 115: RBIF = 0;
+  1174  00F5  100B               	bcf	(88/8),(88)&7
+  1175  00F6  28F7               	goto	i1l2048
+  1176                           	line	116
+  1177                           	
+  1178  00F7                     i1l739:	
+  1179                           	line	117
+  1180                           	
+  1181  00F7                     i1l2048:	
+  1182                           ;proyectoDos.c: 116: }
+  1183                           ;proyectoDos.c: 117: if (RBIF == 1 && RB6 == op) {
+  1184  00F7  1C0B               	btfss	(88/8),(88)&7
+  1185  00F8  28FA               	goto	u238_21
+  1186  00F9  28FB               	goto	u238_20
+  1187  00FA                     u238_21:
+  1188  00FA  290D               	goto	i1l2064
+  1189  00FB                     u238_20:
+  1190                           	
+  1191  00FB                     i1l2050:	
+  1192  00FB  3000               	movlw	0
+  1193  00FC  1B06               	btfsc	(54/8),(54)&7
+  1194  00FD  3001               	movlw	1
+  1195  00FE  062C               	xorwf	(_op),w
+  1196  00FF  1D03               	skipz
+  1197  0100  2902               	goto	u239_21
+  1198  0101  2903               	goto	u239_20
+  1199  0102                     u239_21:
+  1200  0102  290D               	goto	i1l2064
+  1201  0103                     u239_20:
+  1202                           	line	119
+  1203                           	
+  1204  0103                     i1l2052:	
+  1205                           ;proyectoDos.c: 119: TMR1 = -62500;
+  1206  0103  30DC               	movlw	low(0BDCh)
+  1207  0104  008E               	movwf	(14)	;volatile
+  1208  0105  300B               	movlw	high(0BDCh)
+  1209  0106  008F               	movwf	((14))+1	;volatile
+  1210                           	line	120
+  1211                           	
+  1212  0107                     i1l2054:	
+  1213                           ;proyectoDos.c: 120: unidadesSegundos = 0;
+  1214  0107  01B6               	clrf	(_unidadesSegundos)
+  1215                           	line	121
+  1216                           	
+  1217  0108                     i1l2056:	
+  1218                           ;proyectoDos.c: 121: decenasSegundos = 0;
+  1219  0108  01AF               	clrf	(_decenasSegundos)
+  1220                           	line	122
+  1221                           	
+  1222  0109                     i1l2058:	
+  1223                           ;proyectoDos.c: 122: unidadesMinutos = 0;
+  1224  0109  01B5               	clrf	(_unidadesMinutos)
+  1225                           	line	123
+  1226                           	
+  1227  010A                     i1l2060:	
+  1228                           ;proyectoDos.c: 123: decenasMinutos = 0;
+  1229  010A  01AE               	clrf	(_decenasMinutos)
+  1230                           	line	124
+  1231                           	
+  1232  010B                     i1l2062:	
+  1233                           ;proyectoDos.c: 124: RBIF = 0;
+  1234  010B  100B               	bcf	(88/8),(88)&7
+  1235  010C  290D               	goto	i1l2064
+  1236                           	line	125
+  1237                           	
+  1238  010D                     i1l740:	
+  1239                           	line	127
+  1240                           	
+  1241  010D                     i1l2064:	
+  1242                           ;proyectoDos.c: 125: }
+  1243                           ;proyectoDos.c: 127: if (TMR1IF == 1) {
+  1244  010D  1C0C               	btfss	(96/8),(96)&7
+  1245  010E  2910               	goto	u240_21
+  1246  010F  2911               	goto	u240_20
+  1247  0110                     u240_21:
+  1248  0110  2927               	goto	i1l743
+  1249  0111                     u240_20:
+  1250                           	line	128
+  1251                           	
+  1252  0111                     i1l2066:	
+  1253                           ;proyectoDos.c: 128: TMR1 = -62500;
+  1254  0111  30DC               	movlw	low(0BDCh)
+  1255  0112  008E               	movwf	(14)	;volatile
+  1256  0113  300B               	movlw	high(0BDCh)
+  1257  0114  008F               	movwf	((14))+1	;volatile
+  1258                           	line	131
+  1259                           	
+  1260  0115                     i1l2068:	
+  1261                           ;proyectoDos.c: 131: ContTimer += 1;
+  1262  0115  3001               	movlw	(01h)
+  1263  0116  00F0               	movwf	(??_FunInt+0)+0
+  1264  0117  0870               	movf	(??_FunInt+0)+0,w
+  1265  0118  07F7               	addwf	(_ContTimer),f
+  1266                           	line	132
+  1267                           	
+  1268  0119                     i1l2070:	
+  1269                           ;proyectoDos.c: 132: if (ContTimer == 2) {
+  1270  0119  0877               	movf	(_ContTimer),w
+  1271  011A  3A02               	xorlw	02h
+  1272  011B  1D03               	skipz
+  1273  011C  291E               	goto	u241_21
+  1274  011D  291F               	goto	u241_20
+  1275  011E                     u241_21:
+  1276  011E  2925               	goto	i1l2076
+  1277  011F                     u241_20:
+  1278                           	line	133
+  1279                           	
+  1280  011F                     i1l2072:	
+  1281                           ;proyectoDos.c: 133: unidadesSegundos += 1;
+  1282  011F  3001               	movlw	(01h)
+  1283  0120  00F0               	movwf	(??_FunInt+0)+0
+  1284  0121  0870               	movf	(??_FunInt+0)+0,w
+  1285  0122  07B6               	addwf	(_unidadesSegundos),f
+  1286                           	line	134
+  1287                           	
+  1288  0123                     i1l2074:	
+  1289                           ;proyectoDos.c: 134: ContTimer = 0;
+  1290  0123  01F7               	clrf	(_ContTimer)
+  1291  0124  2925               	goto	i1l2076
+  1292                           	line	135
+  1293                           	
+  1294  0125                     i1l742:	
+  1295                           	line	136
+  1296                           	
+  1297  0125                     i1l2076:	
+  1298                           ;proyectoDos.c: 135: }
+  1299                           ;proyectoDos.c: 136: TMR1IF = 0;
+  1300  0125  100C               	bcf	(96/8),(96)&7
+  1301  0126  2927               	goto	i1l743
+  1302                           	line	137
+  1303                           	
+  1304  0127                     i1l741:	
+  1305                           	line	138
+  1306                           	
+  1307  0127                     i1l743:	
+  1308  0127  0874               	movf	(??_FunInt+4),w
+  1309  0128  00FF               	movwf	btemp+1
+  1310  0129  0873               	movf	(??_FunInt+3),w
+  1311  012A  008A               	movwf	pclath
+  1312  012B  0872               	movf	(??_FunInt+2),w
+  1313  012C  0084               	movwf	fsr0
+  1314  012D  0E71               	swapf	(??_FunInt+1)^0FFFFFF80h,w
+  1315  012E  0083               	movwf	status
+  1316  012F  0EFE               	swapf	saved_w,f
+  1317  0130  0E7E               	swapf	saved_w,w
+  1318  0131  0009               	retfie
+  1319                           	opt stack 0
+  1320                           GLOBAL	__end_of_FunInt
+  1321  0132                     	__end_of_FunInt:
+  1322 ;; =============== function _FunInt ends ============
+  1323                           
+  1324                           	signat	_FunInt,88
+  1325                           psect	text165,local,class=CODE,delta=2
+  1326                           global __ptext165
+  1327  0000                     __ptext165:
+  1328                           	global	btemp
+  1329  007E                     	btemp set 07Eh
+  1330                           
+  1331                           	DABS	1,126,2	;btemp
+  1332                           	global	wtemp0
+  1333  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.81 build 7503 
+Symbol Table                                                                                   Mon Oct 09 18:55:41 2023
+
+                   pc 0002                    _op 002C                    fsr 0004                   l721 0032  
+                 l730 0090                   l722 004D                   l731 00A5                   l723 006E  
+                 l732 00CB                   l724 0061                   l733 00D5                   l734 00D6  
+                 l726 005F                   l735 00D6                   l727 006A                   l728 006D  
+                 l729 007A                   l746 0181                   l749 0178                   _GIE 005F  
+                 _RB4 0034                   _RB5 0035                   _RB6 0036                   fsr0 0004  
+                 indf 0000                  l2200 0067                  l2210 007A                  l2202 006A  
+                l2220 008B                  l2212 007D                  l2204 006D                  l2230 009F  
+                l2222 0090                  l2214 0083                  l2206 0074                  l2160 0179  
+                l2240 00AE                  l2232 00A0                  l2224 0093                  l2216 0084  
+                l2208 0075                  l2162 017F                  l2170 0174                  l2242 00B4  
+                l2250 00CB                  l2234 00A5                  l2226 0098                  l2218 008A  
+                l2164 0180                  l2172 0175                  l2252 00CE                  l2244 00BA  
+                l2236 00A8                  l2228 0099                  l2180 001D                  l2166 016D  
+                l2254 00D3                  l2246 00C0                  l2238 00AD                  l2190 0048  
+                l2182 0027                  l2174 0015                  l2168 0173                  l2248 00C6  
+                l2192 004D                  l2184 002C                  l2176 0019                  l2194 0053  
+                l2186 0032                  l2178 001A                  l2196 0059                  l2188 0040  
+                l2198 0061                  u2600 008A                  u2601 0089                  u2610 009F  
+                u2611 009E                  u2620 00B4                  u2540 0048                  u2621 00B3  
+                u2541 0047                  u2630 00BA                  u2550 0053                  u2631 00B9  
+                u2551 0052                  u2640 00C0                  u2560 0059                  u2641 00BF  
+                u2561 0058                  u2650 00C6                  u2570 005F                  u2651 00C5  
+                u2571 005E                  u2580 0067                  u2581 0066                  u2590 0074  
+                u2591 0073                  u2667 003A                  _PEIE 005E                  _RBIE 005B  
+                _RBIF 0058                  _TMR1 000E                  _main 0015                  _left 002B  
+                btemp 007E           main@sentido 0076                  start 0012   __end_of_ConfigIntRB 0182  
+               ?_main 0070            _ConfigTMR1 016D                 i1l740 010D                 i1l741 0127  
+               i1l742 0125                 i1l743 0127                 i1l738 00E7                 i1l739 00F7  
+               _PORTA 0005                 _PORTC 0007                 _TRISB 0086                 _right 0034  
+               pclath 000A                 status 0003                 wtemp0 007E          __end_of_main 00D9  
+              ??_main 0037                i1l2040 00E5                i1l2050 00FB                i1l2042 00EB  
+              i1l2060 010A                i1l2052 0103                i1l2044 00F3                i1l2036 00D9  
+              i1l2070 0119                i1l2062 010B                i1l2054 0107                i1l2046 00F5  
+              i1l2038 00DD                i1l2072 011F                i1l2056 0108                i1l2064 010D  
+              i1l2048 00F7                i1l2074 0123                i1l2066 0111                i1l2058 0109  
+              i1l2076 0125                i1l2068 0115                u240_20 0111                u240_21 0110  
+              u241_20 011F                u241_21 011E                u234_20 00DD                u234_21 00DC  
+              u235_20 00E5                u235_21 00E4                u236_20 00EB                u236_21 00EA  
+              u237_20 00F3                u237_21 00F2                u238_20 00FB                u238_21 00FA  
+              u239_20 0103                u239_21 0102           _ConfigIntRB 0179                _TMR1IE 0460  
+              _TMR1IF 0060                _TMR1ON 0080                _FunInt 00D9           ?_ConfigTMR1 0070  
+              saved_w 007E        __pcstackCOMMON 0070          __pidataBANK0 0160         _bandResortico 002A  
+          __pbssBANK0 002D   __size_of_ConfigTMR1 000C               ?_FunInt 0070            __pmaintext 0015  
+          __pintentry 0004       __size_of_FunInt 0059               _numeros 0020  end_of_initialization 014B  
+        ?_ConfigIntRB 0070               init_ram 0153          ??_ConfigTMR1 0075    __end_of_ConfigTMR1 0179  
+      __end_of_FunInt 0132             _ContTimer 0077   start_initialization 0132              ??_FunInt 0070  
+         __pdataBANK0 0020           __pbssCOMMON 0077         __pcstackBANK0 0037  __size_of_ConfigIntRB 0009  
+           __ptext162 016D             __ptext163 0179             __ptext164 00D9             __ptext165 0000  
+   interrupt_function 0004      _unidadesSegundos 0036             init_fetch 014F              _display1 0030  
+            _display2 0031              _display3 0032              _display4 0033              _contador 002D  
+       __size_of_main 00C4       _unidadesMinutos 0035       _decenasSegundos 002F              intlevel1 0000  
+      _decenasMinutos 002E         ??_ConfigIntRB 0075  
